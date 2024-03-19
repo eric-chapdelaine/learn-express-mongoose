@@ -19,23 +19,24 @@ AuthorSchema
 // We want to make sure we handle the exception by returning an empty string for that case
   var fullname = '';
   if (this.first_name && this.family_name) {
-    fullname = this.family_name + ', ' + this.first_name
+    fullname = this.family_name + ', ' + this.first_name;
   }
   if (!this.first_name || !this.family_name) {
     fullname = '';
   }
+  console.log(this);
   return fullname;
 });
 
 // Virtual for author's lifespan
 AuthorSchema.virtual('lifespan').get(function() {
   var lifespan = '';
-  if (this.first_name) {
+  if (this.date_of_birth) {
     lifespan = this.date_of_birth.getFullYear().toString();
   }
   lifespan += ' - ';
-  if (this.last_name) {
-    lifespan = this.date_of_death.getFullYear().toString();
+  if (this.date_of_death) {
+    lifespan += this.date_of_death.getFullYear().toString();
   }
   return lifespan;
 });
